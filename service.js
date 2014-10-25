@@ -1,12 +1,10 @@
+var service = exports = module.exports = {};
 var AWS = require('aws-sdk');
 AWS.config.loadFromPath('./config.json');
 var dynamodb = new AWS.DynamoDB();
 var async = require('async');
 var current;
-var actions = {
-    buyfield:handleBuyField,
-    seed:handleSeed,
-};
+
 function getSession(sessionId, callback) {
     var params = {
         TableName: 'hayday-session',
@@ -91,7 +89,7 @@ function getPlayer(accountId, callback) {
     });
 }
 
-var validateAuthToken = function(sessionId, callback) {
+service.validateAuthToken = function(sessionId, callback) {
     async.waterfall([
         function(callback) {
             getSession(sessionId, callback);
@@ -119,30 +117,39 @@ var validateAuthToken = function(sessionId, callback) {
     });
 }
 
-var handleBufField(parameters,callback){
+var handleBuyField = function(parameters, callback) {
     var result = "111";
-    callback(null,result);
+    callback(null, result);
 }
 
-var handleActions = function(actons,callback){
-    if(!Array.isArray(actions){
+var handleSeed= function(parameters, callback) {
+    var result = "222";
+    callback(null, result);
+}
+
+service.handleActions = function(actions, callback) {
+    if (!Array.isArray(actions)) {
         callback("invalid request");
     }
-    async.mapSeries(actions,function(action,cb){
-        if(action.action && action.parameters && actions[action.action]){
-            actions[action.action](action.parameters,cb);
-        }else{
+    async.mapSeries(actions, function(action, cb) {
+        console.log("----------"+action.action+"   "+action.parameters);
+        if (action.action && action.parameters && actionHandles[action.action]) {
+            console.log(action.action);
+            actionHandles[action.action](action.parameters, cb);
+        } else {
             cb("bad action");
         }
-    },function(err,result){
-        if(err){
+    }, function(err, result) {
+        if (err) {
             callback(err);
-        }else{
+        } else {
             //save changes to db
-            callback(null,result);
+            callback(null, result);
         }
     });
-});
+}
 
-var service = exports = module.exports = {};
-service.validateAuthToken = validateAuthToken;
+var actionHandles = {
+    buyfield: handleBuyField,
+    seed: handleSeed,
+};
