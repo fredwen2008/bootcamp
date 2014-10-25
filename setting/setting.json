@@ -1,0 +1,114 @@
+{
+    "player": {
+        "maxFields": 10,
+        "maxFriends": 10,
+        "maxBuildings": {
+            "shop": 1,
+            "field": 10,
+            "chickenfarm": 1,
+            "feedfactory": 1,
+            "storage": 1
+        },
+        "gold": 100,
+        "mapWidth": 300,
+        "mapHeight": 400
+    },
+    "field": {
+        "type": "field",
+        "price": 5,
+        "period": 0,
+        "width": 1,
+        "height": 1,
+        "x": 0,
+        "y": 0,
+        "actived": false
+    },
+    "feedFactory": {
+        "type": "feedfactory",
+        "price": 50,
+        "period": 60,
+        "width": 0,
+        "height": 0,
+        "x": 0,
+        "y": 0,
+        "actived": false,
+        "queue": 2
+    },
+    "chickenFarm": {
+        "type": "chickenfarm",
+        "price": 40,
+        "period": 300,
+        "width": 0,
+        "height": 0,
+        "x": 0,
+        "y": 0,
+        "actived": false,
+        "capability": 3
+    },
+    "storage": {
+        "type": "storage",
+        "price": 0,
+        "period": 0,
+        "width": 4,
+        "height": 4,
+        "x": 0,
+        "y": 0,
+        "actived": false,
+        "level": 0,
+        "capabilities": [
+            10,
+            12,
+            14,
+            16,
+            18,
+            20
+        ],
+        "prices": [
+            0,
+            20,
+            40,
+            80,
+            120,
+            200
+        ]
+    },
+    "wheat": {
+        "type": "wheat",
+        "sellDefaultPrice": 1,
+        "sellMaxPrice": 3,
+        "sellPrice": 0,
+        "sellNumber": 0,
+        "sold": false,
+        "period": 30,
+        "output": 2
+    },
+    "egg": {
+        "type": "egg",
+        "sellDefaultPrice": 5,
+        "sellMaxPrice": 18,
+        "sellPrice": 0,
+        "sellNumber": 0,
+        "sold": false
+    },
+    "corn": {
+        "type": "corn",
+        "sellDefaultPrice": 2,
+        "sellMaxPrice": 7,
+        "sellPrice": 0,
+        "sellNumber": 0,
+        "sold": false,
+        "period": 75,
+        "output": 2
+    },
+    "chickenFeed": {
+        "type": "chickenFeed",
+        "sellDefaultPrice": 2,
+        "sellMaxPrice": 7,
+        "sellPrice": 0,
+        "sellNumber": 0,
+        "sold": false,
+        "period": 60,
+        "costWheat": 2,
+        "costCorn": 1
+    }
+}
