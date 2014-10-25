@@ -3,7 +3,10 @@ AWS.config.loadFromPath('./config.json');
 var dynamodb = new AWS.DynamoDB();
 var async = require('async');
 var current;
-
+var actions = {
+    buyfield:handleBuyField,
+    seed:handleSeed,
+};
 function getSession(sessionId, callback) {
     var params = {
         TableName: 'hayday-session',
@@ -115,6 +118,31 @@ var validateAuthToken = function(sessionId, callback) {
             callback(null, result.player.S);
     });
 }
+
+var handleBufField(parameters,callback){
+    var result = "111";
+    callback(null,result);
+}
+
+var handleActions = function(actons,callback){
+    if(!Array.isArray(actions){
+        callback("invalid request");
+    }
+    async.mapSeries(actions,function(action,cb){
+        if(action.action && action.parameters && actions[action.action]){
+            actions[action.action](action.parameters,cb);
+        }else{
+            cb("bad action");
+        }
+    },function(err,result){
+        if(err){
+            callback(err);
+        }else{
+            //save changes to db
+            callback(null,result);
+        }
+    });
+});
 
 var service = exports = module.exports = {};
 service.validateAuthToken = validateAuthToken;
